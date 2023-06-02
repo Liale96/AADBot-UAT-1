@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
-using AdaptiveCards;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
@@ -14,12 +13,16 @@ namespace Microsoft.BotBuilderSamples.Bots
     {
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            //var replyText = $"Echo: {turnContext.Activity.Text}";
-            //await turnContext.SendActivityAsync(MessageFactory.Text(replyText, replyText), cancellationToken);
-
             // find the user's name
             var userName = turnContext.Activity.From.Name;
+            var inputText = turnContext.Activity.Text;
 
+            var replyText = $"Echo: {inputText}";
+            await turnContext.SendActivityAsync(MessageFactory.Text(replyText, replyText), cancellationToken);
+
+
+
+            /*
             //return user's name to user via adaptive card
             var reply = MessageFactory.Attachment(new List<Attachment>());
             var card = new AdaptiveCards.AdaptiveCard();
@@ -35,7 +38,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                 Content = card
             });
             await turnContext.SendActivityAsync(reply, cancellationToken);
-
+           */
 
             // find the user's id
             //var userId = turnContext.Activity.From.Id;
