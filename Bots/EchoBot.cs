@@ -13,8 +13,32 @@ namespace Microsoft.BotBuilderSamples.Bots
     {
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            var replyText = $"Echo: {turnContext.Activity.Text}";
-            await turnContext.SendActivityAsync(MessageFactory.Text(replyText, replyText), cancellationToken);
+            //var replyText = $"Echo: {turnContext.Activity.Text}";
+            //await turnContext.SendActivityAsync(MessageFactory.Text(replyText, replyText), cancellationToken);
+
+            // find the user's name
+            var userName = turnContext.Activity.From.Name;
+
+            //return user's name to user via adaptive card
+            var reply = MessageFactory.Attachment(new List<Attachment>());
+            var card = new AdaptiveCards.AdaptiveCard();
+            card.Body.Add(new AdaptiveCards.AdaptiveTextBlock()
+            {
+                Text = $"Hello {userName}!",
+                Size = AdaptiveCards.AdaptiveTextSize.Large,
+                Weight = AdaptiveCards.AdaptiveTextWeight.Bolder
+            });
+            reply.Attachments.Add(new Attachment()
+            {
+                ContentType = AdaptiveCards.AdaptiveCard.ContentType,
+                Content = card
+            });
+            await turnContext.SendActivityAsync(reply, cancellationToken);
+
+
+            // find the user's id
+            //var userId = turnContext.Activity.From.Id;
+
         }
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)

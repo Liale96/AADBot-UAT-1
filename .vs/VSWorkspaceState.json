@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Bots",
+    "\\Controllers",
+    "\\DeploymentTemplates",
+    "\\DeploymentTemplates\\DeployUseExistResourceGroup",
+    "\\DeploymentTemplates\\DeployWithNewResourceGroup"
+  ],
+  "SelectedNode": "\\Bots\\EchoBot.cs",
+  "PreviewInSolutionExplorer": false
+}
