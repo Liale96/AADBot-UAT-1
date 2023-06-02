@@ -17,7 +17,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             var userName = turnContext.Activity.From.Name;
             var inputText = turnContext.Activity.Text;
 
-            var replyText = $"Hi {inputText}. Echo from the other side: {inputText}";
+            var replyText = $"Hi {userName}. Echo from the other side: {inputText}";
             await turnContext.SendActivityAsync(MessageFactory.Text(replyText, replyText), cancellationToken);
 
 
